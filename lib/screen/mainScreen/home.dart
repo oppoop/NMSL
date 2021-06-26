@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:NMSL/UrlLaunch.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:NMSL/generated/l10n.dart';
+
 class HomeBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -117,9 +119,7 @@ class _HomeState extends State<Home> {
               child: Text('超連結點擊'),
             ),
           ),
-          Container(
-            /*child:_futureBuilder(),*/
-          )
+          Text(S.of(context).test)
         ],
       )
       );

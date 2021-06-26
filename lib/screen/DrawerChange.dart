@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:NMSL/providers/loginStatus.dart';
+import 'package:NMSL/providers/loginNotify.dart';
+import 'package:NMSL/providers/registNotify.dart';
 import 'package:NMSL/screen/memberScreen/login.dart';
 import 'package:NMSL/screen/memberScreen/regist.dart';
 class DrawerChange extends StatefulWidget {
@@ -14,28 +16,36 @@ class _DrawerChange extends State<DrawerChange> {
   final double listSize = 20;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          Consumer<LoginStatusNotifier>(builder:(
-            context,
-            status,
-            _,
-          ){
-            return status.loginStatus?member():visitors();
-          }),
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.black,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<LoginStatusNotifier>(
+          create: (context) => LoginStatusNotifier(),
+        ),
+      ],
+      child: Container(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child:Consumer<LoginStatusNotifier>(builder:(
+                  context,
+                  status,
+                  _,
+                  ){
+                return status.loginStatus?member():visitors();
+              }),
+              decoration: BoxDecoration(
+                color: Colors.black,
+              ),
             ),
-          ),
-          Container(
-            child: drawerBottom?drawerClose():drawerOpen()
-          )
-        ],
+            Container(
+                child: drawerBottom?drawerClose():drawerOpen()
+            )
+          ],
+        ),
       ),
     );
+
   }
 
   Widget drawerOpen(){
@@ -193,7 +203,7 @@ class _DrawerChange extends State<DrawerChange> {
           children: [
             ClipOval(
               child: Image.network(
-                'hhttps://cdn0.popo.tw/uc/default_icons/userpic_L_200x200.jpg',
+                'https://cdn0.popo.tw/uc/default_icons/userpic_L_200x200.jpg',
                 fit: BoxFit.cover,
                 width: 70,
                 height: 70,
@@ -203,7 +213,10 @@ class _DrawerChange extends State<DrawerChange> {
         ),
         FlatButton(
           onPressed:()=>Navigator.push(context,
-            MaterialPageRoute(builder: (context) => Login()),
+            MaterialPageRoute(builder: (context) => ChangeNotifierProvider<LoginNotifier>(
+              create: (context) => LoginNotifier(),
+              child: Login(),
+            ),),
           ),
           child: Text("登入"),
           color: Colors.blue,
@@ -217,7 +230,10 @@ class _DrawerChange extends State<DrawerChange> {
         ),
         FlatButton(
           onPressed:()=>Navigator.push(context,
-            MaterialPageRoute(builder: (context) =>regist()),
+            MaterialPageRoute(builder: (context) =>ChangeNotifierProvider<RegistNotifier>(
+              create: (context) => RegistNotifier(),
+              child:regist(),
+            ),),
           ),
           child: Text("註冊"),
           color: Colors.blue,

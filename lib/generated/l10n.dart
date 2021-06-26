@@ -35,7 +35,15 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-
+  /// `change language test`
+  String get test {
+    return Intl.message(
+      'change language test',
+      name: 'test',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
