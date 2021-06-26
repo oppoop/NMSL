@@ -5,10 +5,19 @@ import 'package:NMSL/screen/mainScreen/home.dart';
 import 'package:NMSL/screen/mainScreen/setting.dart';
 import 'package:NMSL/screen/mainScreen/Reserve.dart';
 import 'package:NMSL/screen/DrawerChange.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'generated/l10n.dart';
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(brightness: Brightness.dark),
       home: AppPage(),
