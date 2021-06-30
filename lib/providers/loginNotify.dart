@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'loginstatus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class LoginNotifier with ChangeNotifier {
 
   String _accountErrorMsg;
@@ -48,7 +50,10 @@ class LoginNotifier with ChangeNotifier {
 
   Future<void> loginSubmit({@required String accountField,@required String passwordFied})
   async{
-    if(accountField == LoginStatusNotifier().account && passwordFied == LoginStatusNotifier().password)
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var _account = prefs.getString('account');
+    var _password = prefs.getString('password');
+    if(accountField ==  _account && passwordFied == _password)
     {
       _loginCheck = true;
     }

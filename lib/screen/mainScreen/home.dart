@@ -5,7 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:NMSL/UrlLaunch.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:NMSL/generated/l10n.dart';
-
+import 'package:NMSL/providers/changeLanguage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 class HomeBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,22 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<TestJson> datas ;
   Future<List<TestJson>> _futuredata;
+  String originValue = 'zh';
+
+  Future<void> _changed(value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (value != null) {
+      setState(() {
+        originValue = value;
+        if (value == 'zh_TW') Provider.of<LanguageNotifier>(context, listen: false)
+            .changeLanguage(locale: 'zh_TW');
+        if (value == 'en') Provider.of<LanguageNotifier>(context, listen: false)
+            .changeLanguage(locale: 'en');
+        prefs.setString('language',originValue);
+      });
+    }
+    print(originValue);
+  }
 
 
   Future<List<TestJson>> Apitest() async{
@@ -119,7 +137,24 @@ class _HomeState extends State<Home> {
               child: Text('超連結點擊'),
             ),
           ),
-          Text(S.of(context).test)
+          Text(S.of(context).test),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(S.of(context).test),
+              RadioListTile<String>(
+                title: Text('中文'),
+                value: 'zh_TW',
+                groupValue: originValue,
+                onChanged: _changed,
+              ),
+              RadioListTile<String>(
+                  title: Text('English'),
+                  value: 'en',
+                  groupValue: originValue,
+                  onChanged: _changed),
+            ],
+          )
         ],
       )
       );

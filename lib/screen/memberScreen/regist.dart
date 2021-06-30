@@ -21,7 +21,12 @@ class _regist extends State<regist> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MultiProvider(providers: [
+      ChangeNotifierProvider<RegistNotifier>(
+        create: (context) => RegistNotifier(),
+      ),
+    ],
+    child: Scaffold(
       appBar: AppBar(
         title: Text(
           "註冊",
@@ -188,6 +193,6 @@ class _regist extends State<regist> {
           ),
         ),
       ),
-    );
+    ),);
   }
 }

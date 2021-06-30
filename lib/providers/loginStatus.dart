@@ -4,10 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class LoginStatusNotifier with ChangeNotifier{
-  String _account;
-  String get account => _account;
-  String _password;
-  String get password => _password;
+
   bool _loginStatus = false;
   bool get loginStatus => _loginStatus;
 
@@ -23,10 +20,8 @@ class LoginStatusNotifier with ChangeNotifier{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _loginStatus = await prefs.setString('account', account);
     prefs.setString('password', password);
-    _account=account;
-    _password=password;
-    print(_account);
-    print(_password);
+    print(account);
+    print(password);
     print(_loginStatus);
     notifyListeners();
   }
@@ -35,12 +30,8 @@ class LoginStatusNotifier with ChangeNotifier{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('account');
     prefs.remove('password');
-    _account=prefs.getString('account');
-    _password=prefs.getString('password');
     _loginStatus = false;
     print('log out');
-    print(_account);
-    print(_password);
     notifyListeners();
   }
 }

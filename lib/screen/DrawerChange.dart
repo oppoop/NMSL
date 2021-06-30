@@ -6,6 +6,7 @@ import 'package:NMSL/providers/loginNotify.dart';
 import 'package:NMSL/providers/registNotify.dart';
 import 'package:NMSL/screen/memberScreen/login.dart';
 import 'package:NMSL/screen/memberScreen/regist.dart';
+import 'package:NMSL/model/buttonDesign.dart';
 class DrawerChange extends StatefulWidget {
   @override
   _DrawerChange createState() => _DrawerChange();
@@ -86,7 +87,7 @@ class _DrawerChange extends State<DrawerChange> {
           ListTile(
             leading: Icon(Icons.star),
             title: Text(
-              'test2',
+              '語系切換',
               style: TextStyle(fontSize: listSize),
             ),
             onTap: () {
@@ -127,71 +128,77 @@ class _DrawerChange extends State<DrawerChange> {
     );
   }
   Widget member(){
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ClipOval(
-              child: Image.network(
-                'https://www.steamxo.com/wp-content/uploads/2019/11/5ggL5q154529_874683.jpg',
-                fit: BoxFit.cover,
-                width: 70,
-                height: 70,
+    return Consumer<LoginStatusNotifier>(builder:(
+        context,
+        status,
+        _,
+        ){
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ClipOval(
+                child: Image.network(
+                  'https://www.steamxo.com/wp-content/uploads/2019/11/5ggL5q154529_874683.jpg',
+                  fit: BoxFit.cover,
+                  width: 70,
+                  height: 70,
+                ),
               ),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'NMSL',
-              style: TextStyle(color: Colors.white, fontSize: 17),
-            ),
-            SizedBox(
-                height: 30,
-                width: 30,
-                child: IconButton(
-                    icon: Icon(
-                        drawerBottom
-                            ? Icons.keyboard_arrow_up_sharp
-                            : Icons.keyboard_arrow_down_sharp,
-                        size: 30,
-                        color: Colors.blue),
-                    onPressed: () {
-                      setState(() {
-                        drawerBottom = !drawerBottom;
-                      });
-                    }))
-          ],
-        ),
-        Row(
-          children: [
-            Text(
-              'yan@gmail.com',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 17,
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'NMSL',
+                style: TextStyle(color: Colors.white, fontSize: 17),
               ),
-            )
-          ],
-        ),
-        Row(
-          children: [
-            Text(
-              '@fuckUbitch',
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 12,
-              ),
-            )
-          ],
-        )
-      ],
-    );
+              SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: IconButton(
+                      icon: Icon(
+                          drawerBottom
+                              ? Icons.keyboard_arrow_up_sharp
+                              : Icons.keyboard_arrow_down_sharp,
+                          size: 30,
+                          color: Colors.blue),
+                      onPressed: () {
+                        setState(() {
+                          drawerBottom = !drawerBottom;
+                        });
+                      }))
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                'yan@gmail.com',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 17,
+                ),
+              )
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                '@fuckUbitch',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 12,
+                ),
+              )
+            ],
+          )
+        ],
+      );
+    });
   }
   Widget visitors(){
     return Column(
@@ -211,39 +218,47 @@ class _DrawerChange extends State<DrawerChange> {
             ),
           ],
         ),
-        FlatButton(
-          onPressed:()=>Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ChangeNotifierProvider<LoginNotifier>(
-              create: (context) => LoginNotifier(),
-              child: Login(),
-            ),),
+        SizedBox(
+          height: 25,
+          width: 70,
+          child: FlatButton(
+            onPressed:()=>Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ChangeNotifierProvider<LoginNotifier>(
+                create: (context) => LoginNotifier(),
+                child: Login(),
+              ),),
+            ),
+            child: Text("登入"),
+            color: Colors.blue,
+            textColor: Colors.black,
+            shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  color: Colors.white,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(8)),
           ),
-          child: Text("登入"),
-          color: Colors.blue,
-          textColor: Colors.black,
-          shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Colors.white,
-                width: 1,
-              ),
-              borderRadius: BorderRadius.circular(8)),
         ),
-        FlatButton(
-          onPressed:()=>Navigator.push(context,
-            MaterialPageRoute(builder: (context) =>ChangeNotifierProvider<RegistNotifier>(
-              create: (context) => RegistNotifier(),
-              child:regist(),
-            ),),
+        SizedBox(
+          height: 25,
+          width: 70,
+          child: FlatButton(
+            onPressed:()=>Navigator.push(context,
+              MaterialPageRoute(builder: (context) =>ChangeNotifierProvider<RegistNotifier>(
+                create: (context) => RegistNotifier(),
+                child:regist(),
+              ),),
+            ),
+            child: Text("註冊"),
+            color: Colors.blue,
+            textColor: Colors.black,
+            shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  color: Colors.white,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(8)),
           ),
-          child: Text("註冊"),
-          color: Colors.blue,
-          textColor: Colors.black,
-          shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Colors.white,
-                width: 1,
-              ),
-              borderRadius: BorderRadius.circular(8)),
         ),
       ],
     );
