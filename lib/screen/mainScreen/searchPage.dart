@@ -1,4 +1,4 @@
-import 'package:NMSL/model.dart';
+import 'package:NMSL/model/BlockChain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:NMSL/screen/mainScreen/search.dart';

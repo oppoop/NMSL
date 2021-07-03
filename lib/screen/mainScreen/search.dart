@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:NMSL/DropBottom.dart';
-import 'package:NMSL/model.dart';
+import 'package:NMSL/model/BlockChain.dart';
 import 'package:NMSL/screen/mainScreen/searchPage.dart';
 
 class SearchBar extends StatefulWidget {

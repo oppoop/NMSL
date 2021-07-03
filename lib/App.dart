@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'generated/l10n.dart';
 
 class App extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -19,26 +20,26 @@ class App extends StatelessWidget {
             create: (context) => LanguageNotifier())
       ],
       child: Consumer<LanguageNotifier>(
-      builder: (
-    context,
-    languageProvider,
-    _,
-    ) {
-    return MaterialApp(
-      locale: languageProvider.language,
-    localizationsDelegates: [
-    S.delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    ],
-    supportedLocales: S.delegate.supportedLocales,
-    debugShowCheckedModeBanner: false,
-    theme: new ThemeData(brightness: Brightness.dark),
-    home: AppPage(),
+        builder: (
+          context,
+          languageProvider,
+          _,
+        ) {
+          return MaterialApp(
+            localizationsDelegates: [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            debugShowCheckedModeBanner: false,
+            theme: new ThemeData(brightness: Brightness.dark),
+            home: AppPage(),
+          );
+        },
+      ),
     );
-    },
-    ),);
   }
 }
 

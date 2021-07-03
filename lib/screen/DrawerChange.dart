@@ -1,3 +1,4 @@
+import 'package:NMSL/utils/pop_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,8 @@ import 'package:NMSL/providers/registNotify.dart';
 import 'package:NMSL/screen/memberScreen/login.dart';
 import 'package:NMSL/screen/memberScreen/regist.dart';
 import 'package:NMSL/model/buttonDesign.dart';
+import 'package:NMSL/utils/app_libs.dart';
+
 class DrawerChange extends StatefulWidget {
   @override
   _DrawerChange createState() => _DrawerChange();
@@ -28,28 +31,25 @@ class _DrawerChange extends State<DrawerChange> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child:Consumer<LoginStatusNotifier>(builder:(
-                  context,
-                  status,
-                  _,
-                  ){
-                return status.loginStatus?member():visitors();
+              child: Consumer<LoginStatusNotifier>(builder: (
+                context,
+                status,
+                _,
+              ) {
+                return status.loginStatus ? member() : visitors();
               }),
               decoration: BoxDecoration(
                 color: Colors.black,
               ),
             ),
-            Container(
-                child: drawerBottom?drawerClose():drawerOpen()
-            )
+            Container(child: drawerBottom ? drawerClose() : drawerOpen())
           ],
         ),
       ),
     );
-
   }
 
-  Widget drawerOpen(){
+  Widget drawerOpen() {
     return Container(
       child: ListView(
         shrinkWrap: true,
@@ -98,7 +98,8 @@ class _DrawerChange extends State<DrawerChange> {
       ),
     );
   }
-  Widget drawerClose(){
+
+  Widget drawerClose() {
     return Container(
       child: ListView(
         shrinkWrap: true,
@@ -127,12 +128,13 @@ class _DrawerChange extends State<DrawerChange> {
       ),
     );
   }
-  Widget member(){
-    return Consumer<LoginStatusNotifier>(builder:(
-        context,
-        status,
-        _,
-        ){
+
+  Widget member() {
+    return Consumer<LoginStatusNotifier>(builder: (
+      context,
+      status,
+      _,
+    ) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,14 +142,37 @@ class _DrawerChange extends State<DrawerChange> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ClipOval(
+              GestureDetector(
+                onTap: () async {
+                  await popWidget.imageViewerDialog(
+                    context: context,
+                    path:
+                        'https://www.steamxo.com/wp-content/uploads/2019/11/5ggL5q154529_874683.jpg',
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  height: 70,
+                  width: 70,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: AppLibScreen.imageContent(
+                      imageOnePath:
+                          'https://www.steamxo.com/wp-content/uploads/2019/11/5ggL5q154529_874683.jpg',
+                    ),
+                  ),
+                ),
+              ),
+              /*ClipOval(
                 child: Image.network(
                   'https://www.steamxo.com/wp-content/uploads/2019/11/5ggL5q154529_874683.jpg',
                   fit: BoxFit.cover,
                   width: 70,
                   height: 70,
                 ),
-              ),
+              ),*/
             ],
           ),
           Row(
@@ -200,7 +225,8 @@ class _DrawerChange extends State<DrawerChange> {
       );
     });
   }
-  Widget visitors(){
+
+  Widget visitors() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -222,11 +248,14 @@ class _DrawerChange extends State<DrawerChange> {
           height: 25,
           width: 70,
           child: FlatButton(
-            onPressed:()=>Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ChangeNotifierProvider<LoginNotifier>(
-                create: (context) => LoginNotifier(),
-                child: Login(),
-              ),),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider<LoginNotifier>(
+                  create: (context) => LoginNotifier(),
+                  child: Login(),
+                ),
+              ),
             ),
             child: Text("登入"),
             color: Colors.blue,
@@ -243,11 +272,14 @@ class _DrawerChange extends State<DrawerChange> {
           height: 25,
           width: 70,
           child: FlatButton(
-            onPressed:()=>Navigator.push(context,
-              MaterialPageRoute(builder: (context) =>ChangeNotifierProvider<RegistNotifier>(
-                create: (context) => RegistNotifier(),
-                child:regist(),
-              ),),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider<RegistNotifier>(
+                  create: (context) => RegistNotifier(),
+                  child: regist(),
+                ),
+              ),
             ),
             child: Text("註冊"),
             color: Colors.blue,
@@ -264,4 +296,3 @@ class _DrawerChange extends State<DrawerChange> {
     );
   }
 }
-

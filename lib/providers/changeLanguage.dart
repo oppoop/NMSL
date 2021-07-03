@@ -23,12 +23,12 @@ class LanguageNotifier with ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String value = prefs.get('language');
       if (lang == "zh_TW") {
-        _locale = Locale('zh_TW');
+        _locale = Locale('zh','TW');
       } else if (lang == "en") {
         _locale = Locale('en');
       }  else {
         if (value.isEmpty) {
-          _locale = Locale('zh_TW');
+          _locale = Locale('zh','TW');
         } else {
           _locale = Locale('$value');
         }
