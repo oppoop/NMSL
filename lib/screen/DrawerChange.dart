@@ -9,6 +9,7 @@ import 'package:NMSL/screen/memberScreen/login.dart';
 import 'package:NMSL/screen/memberScreen/regist.dart';
 import 'package:NMSL/model/buttonDesign.dart';
 import 'package:NMSL/utils/app_libs.dart';
+import 'package:NMSL/screen/customerService.dart';
 
 class DrawerChange extends StatefulWidget {
   @override
@@ -75,13 +76,13 @@ class _DrawerChange extends State<DrawerChange> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.ac_unit),
+            leading: Icon(Icons.assignment_ind_sharp),
             title: Text(
-              'test1',
+              '客服系統',
               style: TextStyle(fontSize: listSize),
             ),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerService()));
             },
           ),
           ListTile(

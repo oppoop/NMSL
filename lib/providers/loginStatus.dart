@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginStatusNotifier with ChangeNotifier{
 
-  bool _loginStatus = true;
+  bool _loginStatus = false;
   bool get loginStatus => _loginStatus;
 
   Future<void> getAccount() async {

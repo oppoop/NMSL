@@ -45,6 +45,7 @@ class _HomeState extends State<Home> {
         prefs.setString('language',originValue);
       });
     }
+
     print(originValue);
   }
 
@@ -152,7 +153,8 @@ class _HomeState extends State<Home> {
                   title: Text('English'),
                   value: 'en',
                   groupValue: originValue,
-                  onChanged: _changed),
+                  onChanged: _changed
+              ),
             ],
           )
         ],

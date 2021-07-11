@@ -32,6 +32,7 @@ class App extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
+            locale:languageProvider.locale,
             supportedLocales: S.delegate.supportedLocales,
             debugShowCheckedModeBanner: false,
             theme: new ThemeData(brightness: Brightness.dark),
