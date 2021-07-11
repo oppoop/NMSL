@@ -4,8 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 class AppLibScreen{
   static Widget appIcon ({
-    @required IconData icon,
-    Color iconColor,
+    required IconData icon,
+    Color? iconColor,
     double size = 20,
     String iconSize = "medium",
   }) {
@@ -34,8 +34,8 @@ class AppLibScreen{
   }
 
   static Widget appText ({
-    @required String text,
-    Color fontColor,
+    required String text,
+    Color? fontColor,
     String textSize = 'medium',
   }) {
     double fontSize = 18;
@@ -61,7 +61,7 @@ class AppLibScreen{
   }
 
   static Widget imageContent ({
-    @required String imageOnePath,
+    required String imageOnePath,
   }) {
     return CachedNetworkImage(
       imageUrl: imageOnePath,

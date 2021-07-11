@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:NMSL/screen/mainScreen/search.dart';
 class PersonPage extends StatelessWidget{
-  final List<blockchainApi> data;
-  bool percentChange;
+  final List<blockchainApi>? data;
+  bool? percentChange;
   void PosOrNeg(index){
-    percentChange = data[index].percentChange24h.startsWith('-');
+    percentChange = data![index].percentChange24h!.startsWith('-');
   }
   PersonPage({this.data});
   @override
@@ -62,7 +62,7 @@ class PersonPage extends StatelessWidget{
                       width: MediaQuery.of(context).size.width *1,
                       child: ListView.builder(
                           shrinkWrap: true,
-                          itemCount: this.data.length,
+                          itemCount: this.data!.length,
                           itemBuilder: (context,index){
                             return ListTile(
                               title: Row(
@@ -79,15 +79,15 @@ class PersonPage extends StatelessWidget{
                                   Container(
                                     height: MediaQuery.of(context).size.height * 0.07,
                                     width: MediaQuery.of(context).size.width *0.15,
-                                    child: Center(child: Text('${data[index].symbol}',style: TextStyle(color:Colors.white,fontSize: 17),),)),
+                                    child: Center(child: Text('${data![index].symbol}',style: TextStyle(color:Colors.white,fontSize: 17),),)),
                                   Container(
                                     height: MediaQuery.of(context).size.height * 0.07,
                                     width: MediaQuery.of(context).size.width *0.6,
-                                      child: Center(child: Text('${data[index].marketCapUsd}',style: TextStyle(color:Colors.white,fontSize: 15),),)),
+                                      child: Center(child: Text('${data![index].marketCapUsd}',style: TextStyle(color:Colors.white,fontSize: 15),),)),
                                   Container(
                                     height: MediaQuery.of(context).size.height * 0.07,
                                     width: MediaQuery.of(context).size.width *0.10,
-                                    child: Center(child: Text('${data[index].percentChange24h}',style: TextStyle(color:Colors.white,fontSize: 15),),)),
+                                    child: Center(child: Text('${data![index].percentChange24h}',style: TextStyle(color:Colors.white,fontSize: 15),),)),
                                 ],
                               ),
                             );
@@ -103,7 +103,7 @@ class PersonPage extends StatelessWidget{
 }
 
 class ListPage extends StatelessWidget{
-  final List<blockchainApi> data;
+  final List<blockchainApi>? data;
   ListPage({this.data});
   @override
   Widget build(BuildContext context) {

@@ -2,17 +2,17 @@ import 'package:flutter/cupertino.dart';
 
 class RegistNotifier with ChangeNotifier {
 
-  String _accountErrorMsg;
-  String get accountErrorMsg => _accountErrorMsg;
+  String? _accountErrorMsg;
+  String? get accountErrorMsg => _accountErrorMsg;
 
-  String _passwordErrorMsg;
-  String get passwordErrorMsg => _passwordErrorMsg;
+  String? _passwordErrorMsg;
+  String? get passwordErrorMsg => _passwordErrorMsg;
 
-  String _confirmErrorMsg;
-  String get confirmErrorMsg => _confirmErrorMsg;
+  String? _confirmErrorMsg;
+  String? get confirmErrorMsg => _confirmErrorMsg;
 
-  String _phoneErrorMsg;
-  String get phoneErrorMsg => _phoneErrorMsg;
+  String? _phoneErrorMsg;
+  String? get phoneErrorMsg => _phoneErrorMsg;
 
   bool _accountValid = false;
   bool get accountValid => _accountValid;
@@ -32,7 +32,7 @@ class RegistNotifier with ChangeNotifier {
   bool hidePassword = true;
 
   void accountValidating({
-    @required String fieldValue,
+    required String fieldValue,
   }) {
     if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(fieldValue)) {
       _accountValid = true;
@@ -45,7 +45,7 @@ class RegistNotifier with ChangeNotifier {
   }
 
   void passwordValidating({
-    @required String fieldValue,
+    required String fieldValue,
   }) {
     if (fieldValue.length > 9) {
       _passwordValid = true;
@@ -58,7 +58,7 @@ class RegistNotifier with ChangeNotifier {
   }
 
   void confirmValidating({
-    @required String passwordValue,@required String confirmValue
+    required String passwordValue,required String confirmValue
   }) {
     if (passwordValue == confirmValue) {
       _confirmValid = true;
@@ -70,7 +70,7 @@ class RegistNotifier with ChangeNotifier {
     notifyListeners();
   }
   void phoneValidating({
-    @required String fieldValue
+    required String fieldValue
   }) {
     if (RegExp( r'^09[0-9]{8}$').hasMatch(fieldValue)) {
       _phoneValid = true;

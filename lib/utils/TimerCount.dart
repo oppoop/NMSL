@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class TimerCount extends StatefulWidget {
-  @override
-  TimerCountState createState() => TimerCountState();
-}
 
-
-class TimerCountState extends State<TimerCount> {
-  @override
-  Widget build(BuildContext context) {}
+class TimerCountState {
   int _time = 120;
-  int _timeMin;
-  int _timesec;
+  int? _timeMin;
+  int? _timesec;
   void timerCountdown() {
     Timer.periodic(Duration(seconds: 1), (timer) {
       _timeMin = (_time / 60).truncate();
@@ -23,7 +16,6 @@ class TimerCountState extends State<TimerCount> {
         _time--;
       }
       print(_time);
-      setState(() {});
     });
   }
 

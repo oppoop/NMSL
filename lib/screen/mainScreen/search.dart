@@ -111,7 +111,7 @@ class _SearchPage extends State<Search> {
               ],
             ),
           ),
-          FutureBuilder(
+          FutureBuilder<List<blockchainApi>?>(
               future: getonlinedata().BlockchainApi(),
               builder: (context, projectSnap) {
                 if ((projectSnap.connectionState == ConnectionState.none) ||

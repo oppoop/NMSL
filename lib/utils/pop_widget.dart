@@ -3,8 +3,8 @@ import 'imageViwer.dart';
 
 class popWidget {
   static Future<void> imageViewerDialog({
-    @required BuildContext context,
-    @required String path,
+    required BuildContext context,
+    required String path,
   }) {
     print(path);
     return showDialog(

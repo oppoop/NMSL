@@ -12,7 +12,7 @@ class DropDownState extends State<DropDownStateWidget>{
   @override
   Widget build(BuildContext context) {
     List<DropdownMenuItem> generateItemList() {
-      List<DropdownMenuItem> items = new List();
+      List<DropdownMenuItem> items = [];
       DropdownMenuItem item1 = new DropdownMenuItem(
           child: new Text('升序'));
       DropdownMenuItem item2 = new DropdownMenuItem(
@@ -31,7 +31,7 @@ class DropDownState extends State<DropDownStateWidget>{
       child: new DropdownButton(
         value: selectItemValue,
         items: generateItemList(),
-        onChanged: (T){
+        onChanged: (dynamic T){
           setState(() {
             selectItemValue=T;
           });

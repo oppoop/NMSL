@@ -3,9 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 
 class getonlinedata{
-  List<blockchainApi> blockchaindata;
-  Future<List<blockchainApi>> futureBlockchain;
-  Future<List<blockchainApi>> BlockchainApi() async {
+  List<blockchainApi>? blockchaindata;
+  Future<List<blockchainApi>?>? futureBlockchain;
+  Future<List<blockchainApi>?> BlockchainApi() async {
     try {
       Uri _uri = Uri.parse('https://api.coinlore.net/api/tickers/');
       final data = await http.get(_uri);
@@ -27,22 +27,22 @@ class getonlinedata{
 }
 
 class blockchainApi {
-  String id;
-  String symbol;
-  String name;
-  String nameid;
-  int rank;
-  String priceUsd;
-  String percentChange24h;
-  String percentChange1h;
-  String percentChange7d;
-  String priceBtc;
-  String marketCapUsd;
-  double volume24;
-  double volume24a;
-  String csupply;
-  String tsupply;
-  String msupply;
+  String? id;
+  String? symbol;
+  String? name;
+  String? nameid;
+  int? rank;
+  String? priceUsd;
+  String? percentChange24h;
+  String? percentChange1h;
+  String? percentChange7d;
+  String? priceBtc;
+  String? marketCapUsd;
+  double? volume24;
+  double? volume24a;
+  String? csupply;
+  String? tsupply;
+  String? msupply;
 
   blockchainApi(
       {this.id,

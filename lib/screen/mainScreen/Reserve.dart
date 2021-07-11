@@ -22,9 +22,9 @@ class Reserve extends StatefulWidget {
 }
 
 class _ReserveState extends State<Reserve> {
-  List<taxdata> hmApi ;
-  Future<List<taxdata>> _futureHm;
-  Future<List<taxdata>> ApiHmtest() async{
+  List<taxdata>? hmApi ;
+  Future<List<taxdata>?>? _futureHm;
+  Future<List<taxdata>?> ApiHmtest() async{
     try {
       Uri _uri = Uri.parse('https://api.kcg.gov.tw/api/service/get/0223bf7c-21b6-41ba-86e1-23e81969e771');
       final data =  await http.get(_uri);
@@ -54,12 +54,12 @@ class _ReserveState extends State<Reserve> {
             return Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: this.hmApi.length,
+                itemCount: this.hmApi!.length,
                 itemBuilder: (context,index){
                   return ListTile(
-                    title: Text('${hmApi[index].datayear}'),
-                    subtitle: Text('${hmApi[index].seq}'),
-                    trailing: Text('${hmApi[index].tax}'),
+                    title: Text('${hmApi![index].datayear}'),
+                    subtitle: Text('${hmApi![index].seq}'),
+                    trailing: Text('${hmApi![index].tax}'),
                   );
                 },
               ),
@@ -88,12 +88,12 @@ class _ReserveState extends State<Reserve> {
 
 
 class taxdata {
-  int seq;
-  String datayear;
-  String statistics;
-  String tax;
-  String dataunit;
-  String value;
+  int? seq;
+  String? datayear;
+  String? statistics;
+  String? tax;
+  String? dataunit;
+  String? value;
 
   taxdata(
       {this.seq,

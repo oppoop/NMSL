@@ -4,11 +4,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginNotifier with ChangeNotifier {
 
-  String _accountErrorMsg;
-  String get accountErrorMsg => _accountErrorMsg;
+  String? _accountErrorMsg;
+  String? get accountErrorMsg => _accountErrorMsg;
 
-  String _passwordErrorMsg;
-  String get passwordErrorMsg => _passwordErrorMsg;
+  String? _passwordErrorMsg;
+  String? get passwordErrorMsg => _passwordErrorMsg;
 
   bool _accountValid = false;
   bool get accountValid => _accountValid;
@@ -22,7 +22,7 @@ class LoginNotifier with ChangeNotifier {
   bool hidePassword = true;
 
   void accountValidating({
-    @required String fieldValue,
+    required String fieldValue,
   }) {
     if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(fieldValue)) {
       _accountValid = true;
@@ -36,7 +36,7 @@ class LoginNotifier with ChangeNotifier {
 
 
   void passwordValidating({
-    @required String fieldValue,
+    required String fieldValue,
   }) {
     if (fieldValue.length > 9) {
       _passwordValid = true;
@@ -48,7 +48,7 @@ class LoginNotifier with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loginSubmit({@required String accountField,@required String passwordFied})
+  Future<void> loginSubmit({required String accountField,required String passwordFied})
   async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var _account = prefs.getString('account');

@@ -7,8 +7,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 class ImageViewer extends StatefulWidget {
   final String imagePath;
   const ImageViewer({
-    Key key,
-    @required this.imagePath,
+    Key? key,
+    required this.imagePath,
   }) : super(key: key);
   @override
   _ImageViewerState createState() => _ImageViewerState();
@@ -70,7 +70,7 @@ class _ImageViewerState extends State<ImageViewer> {
 class ImageContent extends StatelessWidget {
   final String imagePath;
 
-  ImageContent({Key key, @required this.imagePath}) : super(key: key);
+  ImageContent({Key? key, required this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

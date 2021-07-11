@@ -22,7 +22,7 @@ class NetworkConnect{
     });
   }
 
-  static bool checkConnection({ConnectivityResult event}) {
+  static bool checkConnection({ConnectivityResult? event}) {
     if (event == ConnectivityResult.mobile || event == ConnectivityResult.wifi) {
       return true;
     }
@@ -41,7 +41,7 @@ class NetworkConnect{
 }
 
 class DisconnectDialog {
-  Future<bool> showAlert(BuildContext context) async{
+  Future<bool?> showAlert(BuildContext context) async{
     return await showDialog<bool>(
         context: context,
         builder: (BuildContext context) {

@@ -29,8 +29,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<TestJson> datas ;
-  Future<List<TestJson>> _futuredata;
+  List<TestJson>? datas ;
+  Future<List<TestJson>?>? _futuredata;
   String originValue = 'zh';
 
   Future<void> _changed(value) async {
@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
   }
 
 
-  Future<List<TestJson>> Apitest() async{
+  Future<List<TestJson>?> Apitest() async{
     try {
       Uri _uri = Uri.parse('https://jsonplaceholder.typicode.com/todos');
       final data =  await http.get(_uri);
@@ -78,11 +78,11 @@ class _HomeState extends State<Home> {
           return Expanded(
           child: ListView.builder(
           shrinkWrap: true,
-          itemCount: this.datas.length,
+          itemCount: this.datas!.length,
           itemBuilder: (context,index){
             return ListTile(
-              title: Text('${datas[index].title}'),
-              subtitle: Text('${datas[index].completed}'),
+              title: Text('${datas![index].title}'),
+              subtitle: Text('${datas![index].completed}'),
             );
           },
         ),
@@ -97,7 +97,7 @@ class _HomeState extends State<Home> {
     this._futuredata = this.Apitest();
     NetworkConnect.instance.myStream.listen((event) {
       Map<String,bool> connectEvent = event as Map<String,bool>;
-      if(!connectEvent['status']){
+      if(!connectEvent['status']!){
         showDialog(
             barrierDismissible: false,
             context: context, builder: (context){
@@ -138,11 +138,11 @@ class _HomeState extends State<Home> {
               child: Text('超連結點擊'),
             ),
           ),
-          Text(S.of(context).test),
+          Text(S.of(context)!.test),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(S.of(context).test),
+              Text(S.of(context)!.test),
               RadioListTile<String>(
                 title: Text('中文'),
                 value: 'zh_TW',
@@ -165,10 +165,10 @@ class _HomeState extends State<Home> {
 
 
 class TestJson {
-  int userId;
-  int id;
-  String title;
-  bool completed;
+  int? userId;
+  int? id;
+  String? title;
+  bool? completed;
 
   TestJson({this.userId, this.id, this.title, this.completed});
 
