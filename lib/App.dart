@@ -12,6 +12,8 @@ import 'generated/l10n.dart';
 
 class App extends StatelessWidget {
 
+
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -32,7 +34,7 @@ class App extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            locale:languageProvider.locale,
+            locale:context.watch<LanguageNotifier>().locale,
             supportedLocales: S.delegate.supportedLocales,
             debugShowCheckedModeBanner: false,
             theme: new ThemeData(brightness: Brightness.dark),

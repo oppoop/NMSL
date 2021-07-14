@@ -1,9 +1,12 @@
 import 'dart:io';
+import 'package:NMSL/providers/customServiceNotify.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+enum reportType {errorScreen,errorAccount,others}
 
 class CustomerService extends StatefulWidget {
   @override
@@ -13,6 +16,9 @@ class CustomerService extends StatefulWidget {
 class _CustomerServiceState extends State<CustomerService> {
   List<String> _imageList = [];
   int _photoIndex = 0;
+  reportType? _report ;
+  TextEditingController questionsController = TextEditingController();
+  FocusNode questionsFocus = FocusNode();
 
   //action sheet
   List _actionSheet = [
@@ -124,22 +130,34 @@ class _CustomerServiceState extends State<CustomerService> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Radio<String>(
-                  onChanged: null,
-                  value: 'screenError',
-                  groupValue: '1',
+                Radio(
+                  onChanged: (reportType? value){
+                    setState(() {
+                      _report = value;
+                    });
+                  },
+                  value: reportType.errorScreen,
+                  groupValue: _report,
                 ),
                 Text('畫面異常'),
-                Radio<String>(
-                  onChanged: null,
-                  value: 'MemberReport',
-                  groupValue: '1',
+                Radio(
+                  onChanged: (reportType? value){
+                    setState(() {
+                      _report = value;
+                    });
+                  },
+                  value: reportType.errorAccount,
+                  groupValue: _report,
                 ),
                 Text('帳號舉報'),
-                Radio<String>(
-                  onChanged: null,
-                  value: 'others',
-                  groupValue: '1',
+                Radio(
+                  onChanged: (reportType? value){
+                    setState(() {
+                      _report = value;
+                    });
+                  },
+                  value: reportType.others,
+                  groupValue: _report,
                 ),
                 Text('其他'),
               ],
@@ -153,32 +171,45 @@ class _CustomerServiceState extends State<CustomerService> {
               width: MediaQuery.of(context).size.width*0.8,
               height: 200.0,
               child: DecoratedBox(
-                child: TextFormField(
-                  textAlign: TextAlign.center,
-                  maxLines: null,
-                  minLines: null,
-                  autofocus: false,
-                  expands: true ,
-                  style: new TextStyle(fontWeight: FontWeight.normal, color: Colors.white),
-                  decoration: InputDecoration(
-                    hintText: '請寫下問題',
-                    hintStyle: TextStyle(fontSize: 30,color: Colors.black),
-                    contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                    border: OutlineInputBorder(
-                        borderSide: (BorderSide(color: Colors.black,width: 2)),
-                    borderRadius: BorderRadius.circular(32.0)
+                child: Consumer<customServiceNotify>(builder: (context,questins,_){
+                  return TextFormField(
+                    controller: questionsController,
+                    focusNode: questionsFocus,
+                    textAlign: TextAlign.center,
+                    maxLines: null,
+                    minLines: null,
+                    autofocus: false,
+                    expands: true ,
+                    style: new TextStyle(fontWeight: FontWeight.normal, color: Colors.white),
+                    decoration: InputDecoration(
+                      hintText: '請寫下問題',
+                      hintStyle: TextStyle(fontSize: 30,color: Colors.black),
+                      contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                      border: OutlineInputBorder(
+                          borderSide: (BorderSide(color: Colors.black,width: 2)),
+                          borderRadius: BorderRadius.circular(32.0)
+                      ),
                     ),
-                  ),
-                ),
+                    onChanged: (text){
+                      Provider.of<customServiceNotify>(context,listen: false).questionsValiding(fiedValue:questionsController.text);
+                    },
+                  );
+                }),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(32.0),
                   color: Colors.grey
                 ),)
             ),
+            Padding(padding: EdgeInsets.only(bottom: 10)),
+            Consumer<customServiceNotify>(builder:(context,questions,_){
+              return Text('${questions.questionserrorMsg}',style: TextStyle(color: Colors.red,fontSize: 20),);
+            }),
             Padding(padding: EdgeInsets.only(bottom: 20)),
             RaisedButton(
               child: Text("送出"),
-              onPressed: null,
+              onPressed:(){
+                print(_report);
+              },
             ),
           ],
         ),

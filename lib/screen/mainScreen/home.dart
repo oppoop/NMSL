@@ -8,6 +8,9 @@ import 'package:NMSL/generated/l10n.dart';
 import 'package:NMSL/providers/changeLanguage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
+import 'package:NMSL/utils/imageDowload.dart';
+
+
 class HomeBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -32,6 +35,7 @@ class _HomeState extends State<Home> {
   List<TestJson>? datas ;
   Future<List<TestJson>?>? _futuredata;
   String originValue = 'zh';
+  String url = 'https://static-cdn.jtvnw.net/jtv_user_pictures/23086aa5-9d4d-4b92-b64f-202c88d2845d-profile_image-300x300.png';
 
   Future<void> _changed(value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -138,11 +142,11 @@ class _HomeState extends State<Home> {
               child: Text('超連結點擊'),
             ),
           ),
-          Text(S.of(context)!.test),
+          Text(S.of(context).test),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(S.of(context)!.test),
+              Text(S.of(context).test),
               RadioListTile<String>(
                 title: Text('中文'),
                 value: 'zh_TW',
@@ -156,7 +160,14 @@ class _HomeState extends State<Home> {
                   onChanged: _changed
               ),
             ],
-          )
+          ),
+          SizedBox(
+            width: 200,
+            height: 200,
+            child: Image.network(url),
+          ),
+          ElevatedButton(onPressed: ()async{save(url: url);}, child: Text('下載圖片方法1')),
+          ElevatedButton(onPressed: ()async{save2(url: url);}, child: Text('下載圖片方法2')),
         ],
       )
       );

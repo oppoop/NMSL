@@ -7,7 +7,7 @@ import 'package:NMSL/providers/loginNotify.dart';
 import 'package:NMSL/providers/registNotify.dart';
 import 'package:NMSL/screen/memberScreen/login.dart';
 import 'package:NMSL/screen/memberScreen/regist.dart';
-import 'package:NMSL/model/buttonDesign.dart';
+import 'package:NMSL/providers/customServiceNotify.dart';
 import 'package:NMSL/utils/app_libs.dart';
 import 'package:NMSL/screen/customerService.dart';
 
@@ -82,7 +82,15 @@ class _DrawerChange extends State<DrawerChange> {
               style: TextStyle(fontSize: listSize),
             ),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerService()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider<customServiceNotify>(
+                    create: (context) => customServiceNotify(),
+                    child: CustomerService(),
+                  ),
+                ),
+              );
             },
           ),
           ListTile(
