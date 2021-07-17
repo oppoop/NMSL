@@ -1,16 +1,14 @@
-import 'dart:convert';
+
 import 'package:NMSL/network/connect.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:NMSL/UrlLaunch.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:NMSL/generated/l10n.dart';
 import 'package:NMSL/providers/changeLanguage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:NMSL/utils/imageDowload.dart';
-
-
+import 'package:flustars/flustars.dart';
+import 'package:permission_handler/permission_handler.dart';
 class HomeBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -32,73 +30,38 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<TestJson>? datas ;
-  Future<List<TestJson>?>? _futuredata;
-  String originValue = 'zh';
+  String groupValue = 'zh';
   String url = 'https://static-cdn.jtvnw.net/jtv_user_pictures/23086aa5-9d4d-4b92-b64f-202c88d2845d-profile_image-300x300.png';
+  final _snackBar = SnackBar(
+      content: Text('已下載')
+  );
 
-  Future<void> _changed(value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  void _changed(value) {
     if (value != null) {
       setState(() {
-        originValue = value;
-        if (value == 'zh_TW') Provider.of<LanguageNotifier>(context, listen: false)
-            .changeLanguage(locale: 'zh_TW');
-        if (value == 'en') Provider.of<LanguageNotifier>(context, listen: false)
-            .changeLanguage(locale: 'en');
-        prefs.setString('language',originValue);
+        groupValue = value;
+        if (value == "zh") Provider.of<LanguageProvider>(context, listen: false).changeMode("zh");
+        if (value == "en") Provider.of<LanguageProvider>(context, listen: false).changeMode("en");
+        SpUtil.putString("language", groupValue);
       });
     }
+    print(groupValue);
+  }
 
-    print(originValue);
+  _requestPermission() async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.storage,
+    ].request();
+
+    final info = statuses[Permission.storage].toString();
+    print(info);
   }
 
 
-  Future<List<TestJson>?> Apitest() async{
-    try {
-      Uri _uri = Uri.parse('https://jsonplaceholder.typicode.com/todos');
-      final data =  await http.get(_uri);
-      if(data.statusCode == 200){
-        List dk =  json.decode(data.body) as List;
-        return dk.map((e) => TestJson.fromJson(e)).toList();
-      } else if (data.statusCode == 404){return null;}
-      else{return null;}
-    }
-    catch (e) {
-      throw Exception(e);
-    }
-  }
-
-  FutureBuilder _futureBuilder(){
-    return FutureBuilder(
-      future: this._futuredata,
-      builder: (context,projectSnap){
-        if ((projectSnap.connectionState == ConnectionState.none)||
-            (projectSnap.hasData == null)||
-            (projectSnap.data == null))
-            {return Container();}
-        else{
-          this.datas = projectSnap.data;
-          return Expanded(
-          child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: this.datas!.length,
-          itemBuilder: (context,index){
-            return ListTile(
-              title: Text('${datas![index].title}'),
-              subtitle: Text('${datas![index].completed}'),
-            );
-          },
-        ),
-              );
-        }
-      });
-  }
 
   @override
   void initState(){
     super.initState();
-    this._futuredata = this.Apitest();
     NetworkConnect.instance.myStream.listen((event) {
       Map<String,bool> connectEvent = event as Map<String,bool>;
       if(!connectEvent['status']!){
@@ -127,6 +90,7 @@ class _HomeState extends State<Home> {
       }else{}
     });
     NetworkConnect.instance.init();
+    _requestPermission();
   }
 
   @override
@@ -149,14 +113,14 @@ class _HomeState extends State<Home> {
               Text(S.of(context).test),
               RadioListTile<String>(
                 title: Text('中文'),
-                value: 'zh_TW',
-                groupValue: originValue,
+                value: 'zh',
+                groupValue: groupValue,
                 onChanged: _changed,
               ),
               RadioListTile<String>(
                   title: Text('English'),
                   value: 'en',
-                  groupValue: originValue,
+                  groupValue: groupValue,
                   onChanged: _changed
               ),
             ],
@@ -166,7 +130,9 @@ class _HomeState extends State<Home> {
             height: 200,
             child: Image.network(url),
           ),
-          ElevatedButton(onPressed: ()async{save(url: url);}, child: Text('下載圖片方法1')),
+          ElevatedButton(
+              onPressed: ()async{save(url: url);await Scaffold.of(context).showSnackBar(_snackBar);},
+              child: Text('下載圖片方法1')),
           ElevatedButton(onPressed: ()async{save2(url: url);}, child: Text('下載圖片方法2')),
         ],
       )
@@ -175,27 +141,3 @@ class _HomeState extends State<Home> {
 }
 
 
-class TestJson {
-  int? userId;
-  int? id;
-  String? title;
-  bool? completed;
-
-  TestJson({this.userId, this.id, this.title, this.completed});
-
-  TestJson.fromJson(Map<String, dynamic> json) {
-    userId = json['userId'];
-    id = json['id'];
-    title = json['title'];
-    completed = json['completed'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['userId'] = this.userId;
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['completed'] = this.completed;
-    return data;
-  }
-}

@@ -59,6 +59,136 @@ class S {
       args: [],
     );
   }
+
+  /// `Login`
+  String get login {
+    return Intl.message(
+      'Login',
+      name: 'login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Regist`
+  String get regist {
+    return Intl.message(
+      'Regist',
+      name: 'regist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Member Center`
+  String get membercenter {
+    return Intl.message(
+      'Member Center',
+      name: 'membercenter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Custom Serbice`
+  String get customservice {
+    return Intl.message(
+      'Custom Serbice',
+      name: 'customservice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Language`
+  String get languagechange {
+    return Intl.message(
+      'Change Language',
+      name: 'languagechange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the email`
+  String get enteremail {
+    return Intl.message(
+      'Please enter the email',
+      name: 'enteremail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the password`
+  String get enterpassword {
+    return Intl.message(
+      'Please enter the password',
+      name: 'enterpassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please re-enter the password`
+  String get reenterpasswoed {
+    return Intl.message(
+      'Please re-enter the password',
+      name: 'reenterpasswoed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the phone numbre`
+  String get enterphone {
+    return Intl.message(
+      'Please enter the phone numbre',
+      name: 'enterphone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `submit`
+  String get submit {
+    return Intl.message(
+      'submit',
+      name: 'submit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Setting`
+  String get seeting {
+    return Intl.message(
+      'Setting',
+      name: 'seeting',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -67,7 +197,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
-      Locale.fromSubtags(languageCode: 'zh', countryCode: 'TW'),
+      Locale.fromSubtags(languageCode: 'zh'),
     ];
   }
 

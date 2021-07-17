@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:dio/dio.dart';
 import 'dart:typed_data';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:flutter/services.dart';
+
 
 Future<void> save({required String url}) async {
   var response = await Dio().get(
@@ -12,7 +14,6 @@ Future<void> save({required String url}) async {
       Uint8List.fromList(response.data),
       quality: 60,
       name: "妲妲");
-  print(result);
 }
 
 Future<void> save2({required String url}) async{

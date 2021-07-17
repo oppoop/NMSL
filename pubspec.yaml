@@ -21,6 +21,8 @@ environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
+  permission_handler: ^8.1.2
+  flustars: ^2.0.1
   image_downloader: ^0.30.0
   dio: ^4.0.0
   image_gallery_saver: ^1.6.9

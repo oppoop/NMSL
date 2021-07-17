@@ -205,12 +205,8 @@ class _CustomerServiceState extends State<CustomerService> {
               return Text('${questions.questionserrorMsg}',style: TextStyle(color: Colors.red,fontSize: 20),);
             }),
             Padding(padding: EdgeInsets.only(bottom: 20)),
-            RaisedButton(
-              child: Text("送出"),
-              onPressed:(){
-                print(_report);
-              },
-            ),
+           ElevatedButton(onPressed: (){},
+               child: Text('送出'))
           ],
         ),
       ),

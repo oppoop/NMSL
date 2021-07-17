@@ -9,40 +9,56 @@ import 'package:NMSL/screen/DrawerChange.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'generated/l10n.dart';
-
+import 'package:flustars/flustars.dart';
 class App extends StatelessWidget {
 
+  String? value = SpUtil.getString("language");
 
+  _listenerLocal(String? lag) {
+    if (lag == "zh") {
+      return Locale('zh');
+    } else if (lag == "en") {
+      return Locale('en');
+    } else{
+      if(value == Null){
+        return Locale('zh');
+      }else{
+        return Locale('$value');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<LanguageNotifier>(
-            create: (context) => LanguageNotifier())
+        ChangeNotifierProvider<LanguageProvider>(
+          create: (context) => LanguageProvider(),
+        ),
       ],
-      child: Consumer<LanguageNotifier>(
+      child: Consumer<LanguageProvider>(
         builder: (
-          context,
-          languageProvider,
-          _,
-        ) {
+            context,
+            languageProvider,
+            _,
+            ) {
           return MaterialApp(
+            locale:Locale('en'),
             localizationsDelegates: [
               S.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            locale:context.watch<LanguageNotifier>().locale,
             supportedLocales: S.delegate.supportedLocales,
             debugShowCheckedModeBanner: false,
             theme: new ThemeData(brightness: Brightness.dark),
             home: AppPage(),
           );
         },
-      ),
+      )
     );
+
   }
 }
 
