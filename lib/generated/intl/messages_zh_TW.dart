@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a zh locale. All the
+// This is a library that provides messages for a zh_TW locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -17,7 +17,7 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'zh';
+  String get localeName => 'zh_TW';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -31,7 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reenterpasswoed": MessageLookupByLibrary.simpleMessage("請再次輸入密碼"),
         "regist": MessageLookupByLibrary.simpleMessage("註冊"),
         "search": MessageLookupByLibrary.simpleMessage("搜尋"),
+        "setting": MessageLookupByLibrary.simpleMessage("設定"),
         "submit": MessageLookupByLibrary.simpleMessage("送出"),
-        "test": MessageLookupByLibrary.simpleMessage("語系測試")
+        "test": MessageLookupByLibrary.simpleMessage("測試頁面")
       };
 }

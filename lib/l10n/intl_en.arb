@@ -1,5 +1,5 @@
 {
-  "test": "change language test",
+  "test": "TEST",
   "login": "Login",
   "regist": "Regist",
   "membercenter": "Member Center",
@@ -12,5 +12,5 @@
   "submit": "submit",
   "home": "Home",
   "search": "Search",
-  "seeting": "Setting"
+  "setting": "Setting"
 }

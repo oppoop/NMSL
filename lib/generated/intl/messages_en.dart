@@ -37,8 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please re-enter the password"),
         "regist": MessageLookupByLibrary.simpleMessage("Regist"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
-        "seeting": MessageLookupByLibrary.simpleMessage("Setting"),
+        "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "submit": MessageLookupByLibrary.simpleMessage("submit"),
-        "test": MessageLookupByLibrary.simpleMessage("change language test")
+        "test": MessageLookupByLibrary.simpleMessage("TEST")
       };
 }

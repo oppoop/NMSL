@@ -50,10 +50,10 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `change language test`
+  /// `TEST`
   String get test {
     return Intl.message(
-      'change language test',
+      'TEST',
       name: 'test',
       desc: '',
       args: [],
@@ -181,10 +181,10 @@ class S {
   }
 
   /// `Setting`
-  String get seeting {
+  String get setting {
     return Intl.message(
       'Setting',
-      name: 'seeting',
+      name: 'setting',
       desc: '',
       args: [],
     );
@@ -197,7 +197,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
-      Locale.fromSubtags(languageCode: 'zh'),
+      Locale.fromSubtags(languageCode: 'zh', countryCode: 'TW'),
     ];
   }
 

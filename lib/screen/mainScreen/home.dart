@@ -1,4 +1,3 @@
-
 import 'package:NMSL/network/connect.dart';
 import 'package:flutter/material.dart';
 import 'package:NMSL/UrlLaunch.dart';
@@ -7,7 +6,6 @@ import 'package:NMSL/generated/l10n.dart';
 import 'package:NMSL/providers/changeLanguage.dart';
 import 'package:provider/provider.dart';
 import 'package:NMSL/utils/imageDowload.dart';
-import 'package:flustars/flustars.dart';
 import 'package:permission_handler/permission_handler.dart';
 class HomeBar extends StatelessWidget {
   @override
@@ -16,7 +14,7 @@ class HomeBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text('首頁'),
+          Text(S.of(context).home),
         ],
       ),
     );
@@ -40,9 +38,8 @@ class _HomeState extends State<Home> {
     if (value != null) {
       setState(() {
         groupValue = value;
-        if (value == "zh") Provider.of<LanguageProvider>(context, listen: false).changeMode("zh");
-        if (value == "en") Provider.of<LanguageProvider>(context, listen: false).changeMode("en");
-        SpUtil.putString("language", groupValue);
+        if (value == "zh_TW") Provider.of<LanguageProvider>(context, listen: false).changeLanguage(locale: Locale('zh','TW'));
+        if (value == "en") Provider.of<LanguageProvider>(context, listen: false).changeLanguage(locale: Locale('en'));
       });
     }
     print(groupValue);
@@ -112,16 +109,16 @@ class _HomeState extends State<Home> {
             children: [
               Text(S.of(context).test),
               RadioListTile<String>(
-                title: Text('中文'),
-                value: 'zh',
+                title: Text('繁中'),
+                value: 'zh_TW',
                 groupValue: groupValue,
-                onChanged: _changed,
+                onChanged:_changed,
               ),
               RadioListTile<String>(
                   title: Text('English'),
                   value: 'en',
                   groupValue: groupValue,
-                  onChanged: _changed
+                  onChanged:_changed,
               ),
             ],
           ),

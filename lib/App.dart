@@ -9,24 +9,8 @@ import 'package:NMSL/screen/DrawerChange.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'generated/l10n.dart';
-import 'package:flustars/flustars.dart';
 class App extends StatelessWidget {
 
-  String? value = SpUtil.getString("language");
-
-  _listenerLocal(String? lag) {
-    if (lag == "zh") {
-      return Locale('zh');
-    } else if (lag == "en") {
-      return Locale('en');
-    } else{
-      if(value == Null){
-        return Locale('zh');
-      }else{
-        return Locale('$value');
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +27,10 @@ class App extends StatelessWidget {
             _,
             ) {
           return MaterialApp(
-            locale:Locale('en'),
+            locale: Locale(
+              context.watch<LanguageProvider>().languageCode,
+                context.watch<LanguageProvider>().countryCode,
+            ),
             localizationsDelegates: [
               S.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -138,10 +125,10 @@ class _AppState extends State<AppPage> {
         onTap: onTabTapped,
         currentIndex: _currentIndex,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: '首頁'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: '搜尋'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: '設定'),
-          BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: '測試'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: S.of(context).home),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: S.of(context).search),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label:S.of(context).setting),
+          BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: S.of(context).test),
         ],
       ),
       drawer: Drawer(
