@@ -13,6 +13,7 @@ class LoginStatusNotifier with ChangeNotifier{
     var account = prefs.getString('account');
     print(account);
     if(account != null){_loginStatus = true;}
+    print(loginStatus);
     notifyListeners();
   }
 

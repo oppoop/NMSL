@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'utils.dart';
-class todos_json extends StatefulWidget{
+class TodosJson extends StatefulWidget{
   @override
- _todos_json createState() => _todos_json();
+  _TodosJson createState() => _TodosJson();
 }
-class _todos_json extends State<todos_json>
+class _TodosJson extends State<TodosJson>
 {
   @override
   void initState() {

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:NMSL/screen/mainScreen/home.dart';
 import 'package:NMSL/screen/mainScreen/setting.dart';
 import 'package:NMSL/screen/mainScreen/Reserve.dart';
-import 'package:NMSL/screen/DrawerChange.dart';
+import 'package:NMSL/screen/left_list/DrawerChange.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'generated/l10n.dart';

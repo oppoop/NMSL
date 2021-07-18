@@ -1,6 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:NMSL/appi_Test/BlockChain_Data/screen.dart';
+import 'package:NMSL/appi_Test/tax_data/screen.dart';
+import 'package:NMSL/appi_Test/todos_json/screen.dart';
 
 class ReserveBar extends StatelessWidget {
   @override
@@ -15,111 +16,37 @@ class ReserveBar extends StatelessWidget {
     );
   }
 }
-
 class Reserve extends StatefulWidget {
   @override
-  _ReserveState createState() => _ReserveState();
+  _Reserve createState() => _Reserve();
 }
 
-class _ReserveState extends State<Reserve> {
-  List<taxdata>? hmApi ;
-  Future<List<taxdata>?>? _futureHm;
-  Future<List<taxdata>?> ApiHmtest() async{
-    try {
-      Uri _uri = Uri.parse('https://api.kcg.gov.tw/api/service/get/0223bf7c-21b6-41ba-86e1-23e81969e771');
-      final data =  await http.get(_uri);
-      if(data.statusCode == 200){
-        if(json.decode(data.body)['success']){
-          List dk = json.decode(data.body)['data'] as List;
-          return dk.map((e) => taxdata.fromJson(e)).toList();
-        }
-      } else if (data.statusCode == 404){return null;}
-      else{return null;}
-    }
-    catch (e) {
-      throw Exception(e);
-    }
+class _Reserve extends State<Reserve>{
+  int _currentIndex = 0;
+  final List<Widget> _api = [TaxData(),TodosJson()];
+  final List _tittle = ['稅收API','隨意接'];
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 
-  FutureBuilder _futureHmapi(){
-    return FutureBuilder(
-        future: this._futureHm,
-        builder: (context,projectSnap){
-          if ((projectSnap.connectionState == ConnectionState.none)||
-              (projectSnap.hasData == null)||
-              (projectSnap.data == null))
-          {return Container();}
-          else{
-            this.hmApi= projectSnap.data;
-            return Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: this.hmApi!.length,
-                itemBuilder: (context,index){
-                  return ListTile(
-                    title: Text('${hmApi![index].datayear}'),
-                    subtitle: Text('${hmApi![index].seq}'),
-                    trailing: Text('${hmApi![index].tax}'),
-                  );
-                },
-              ),
-            );
-          }
-        });
-  }
-  @override
-  void initState(){
-    this._futureHm = this.ApiHmtest();
-    super.initState();
-  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            child: _futureHmapi(),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-
-class taxdata {
-  int? seq;
-  String? datayear;
-  String? statistics;
-  String? tax;
-  String? dataunit;
-  String? value;
-
-  taxdata(
-      {this.seq,
-        this.datayear,
-        this.statistics,
-        this.tax,
-        this.dataunit,
-        this.value});
-
-  taxdata.fromJson(Map<String, dynamic> json) {
-    seq = json['seq'];
-    datayear = json['資料年期別'];
-    statistics = json['統計項目'];
-    tax = json['稅率別'];
-    dataunit = json['資料單位'];
-    value = json['值'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['seq'] = this.seq;
-    data['datayear'] = this.datayear;
-    data['statistics'] = this.statistics;
-    data['tax'] = this.tax;
-    data['dataunit'] = this.dataunit;
-    data['value'] = this.value;
-    return data;
+    return Center(
+        child: ListView.builder(
+      itemCount: _api.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          leading: Icon(Icons.arrow_forward),
+          title: Text('${_tittle[index]}'),
+          onTap:(){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => _api[index]));
+          },
+        );
+      },
+    ));
   }
 }

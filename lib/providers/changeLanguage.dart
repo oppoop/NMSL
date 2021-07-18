@@ -25,13 +25,13 @@ class LanguageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-/*  Future<void> getLocale () async {
+  Future<void> getLocale () async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getString("languageCode") != null) {
-      languageCode = prefs.getString("languageCode");
+      languageCode = prefs.getString("languageCode")!;
     }
     if (prefs.getString("countryCode") != null) {
       countryCode = prefs.getString("countryCode") == '' ? null : prefs.getString("countryCode") ;
     }
-  }*/
+  }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'loginstatus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginNotifier with ChangeNotifier {

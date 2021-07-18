@@ -31,10 +31,7 @@ class _SearchBarState extends State<SearchBar> {
                 hintText: "搜尋",
                 prefixIcon: Icon(Icons.search, color: Colors.black)),
           )),
-          Container(
-            child: DropDownStateWidget(),
-          )
-        ],
+                 ],
       ),
     );
   }

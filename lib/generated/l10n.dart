@@ -90,10 +90,10 @@ class S {
     );
   }
 
-  /// `Custom Serbice`
+  /// `Custom Service`
   String get customservice {
     return Intl.message(
-      'Custom Serbice',
+      'Custom Service',
       name: 'customservice',
       desc: '',
       args: [],

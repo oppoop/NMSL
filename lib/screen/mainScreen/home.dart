@@ -103,7 +103,6 @@ class _HomeState extends State<Home> {
               child: Text('超連結點擊'),
             ),
           ),
-          Text(S.of(context).test),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

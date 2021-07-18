@@ -22,8 +22,8 @@ class _regist extends State<regist> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
-      ChangeNotifierProvider<RegistNotifier>(
-        create: (context) => RegistNotifier(),
+      ChangeNotifierProvider<LoginStatusNotifier>(
+        create: (context) => LoginStatusNotifier(),
       ),
     ],
     child: Scaffold(
