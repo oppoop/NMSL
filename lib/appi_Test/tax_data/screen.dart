@@ -16,14 +16,13 @@ class _TaxDataState extends State<TaxData> {
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            child: futureHmapi(),
-          )
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('TAX API'),
       ),
+      body:futureHmapi(),
     );
   }
+
 }

@@ -32,18 +32,16 @@ FutureBuilder futureHmapi(){
         {return Container();}
         else{
           hmApi= projectSnap.data;
-          return Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: hmApi!.length,
-              itemBuilder: (context,index){
-                return ListTile(
-                  title: Text('${hmApi![index].datayear}'),
-                  subtitle: Text('${hmApi![index].seq}'),
-                  trailing: Text('${hmApi![index].tax}'),
-                );
-              },
-            ),
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: hmApi!.length,
+            itemBuilder: (context,index){
+              return ListTile(
+                title: Text('${hmApi![index].datayear}'),
+                subtitle: Text('${hmApi![index].seq}'),
+                trailing: Text('${hmApi![index].tax}'),
+              );
+            },
           );
         }
       });

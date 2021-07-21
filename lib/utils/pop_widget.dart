@@ -1,5 +1,7 @@
+import 'dart:io';
+import 'package:NMSL/utils/imageViwerLocal.dart';
 import 'package:flutter/material.dart';
-import 'imageViwer.dart';
+import 'imageViwerOnline.dart';
 
 class popWidget {
   static Future<void> imageViewerDialog({
@@ -9,7 +11,19 @@ class popWidget {
     print(path);
     return showDialog(
       context: context,
-      builder: (context) => ImageViewer(imagePath: path,),
+      builder: (context) => ImageViewerOnline(imagePath: path,),
     );
   }
+
+  static Future<void> imageFileDialog({
+    required BuildContext context,
+    required String img,
+  }) {
+    print(img);
+    return showDialog(
+      context: context,
+      builder: (context) => ImageViewerLocal(imaglocal: img,),
+    );
+  }
+
 }

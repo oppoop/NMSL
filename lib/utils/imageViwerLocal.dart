@@ -1,20 +1,20 @@
+import 'dart:io';
 import 'package:NMSL/utils/app_libs.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class ImageViewer extends StatefulWidget {
-  final String imagePath;
-  const ImageViewer({
+class ImageViewerLocal extends StatefulWidget {
+  final String imaglocal;
+  const ImageViewerLocal({
     Key? key,
-    required this.imagePath,
+    required this.imaglocal,
   }) : super(key: key);
   @override
-  _ImageViewerState createState() => _ImageViewerState();
+  _ImageViewerLocalState createState() => _ImageViewerLocalState();
 }
 
-class _ImageViewerState extends State<ImageViewer> {
+class _ImageViewerLocalState extends State<ImageViewerLocal> {
   final CarouselController buttonCarouselController = CarouselController();
   double _width = 200.0;
 
@@ -50,14 +50,12 @@ class _ImageViewerState extends State<ImageViewer> {
               child: GestureDetector(
                 onScaleUpdate: (ScaleUpdateDetails details) {
                   setState(
-                    () {
+                        () {
                       _width = 200 * details.scale.clamp(.8, 10.0);
                     },
                   );
                 },
-                child: ImageContent(
-                  imagePath: widget.imagePath,
-                ),
+                child: ImageContent(imglocal: widget.imaglocal,)
               ),
             ),
           ],
@@ -68,9 +66,9 @@ class _ImageViewerState extends State<ImageViewer> {
 }
 
 class ImageContent extends StatelessWidget {
-  final String imagePath;
+  final String imglocal;
 
-  ImageContent({Key? key, required this.imagePath}) : super(key: key);
+  ImageContent({Key? key, required this.imglocal}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -85,9 +83,7 @@ class ImageContent extends StatelessWidget {
         child: PhotoView(
           initialScale: PhotoViewComputedScale.contained * 1,
           minScale: PhotoViewComputedScale.contained * 1,
-          imageProvider: CachedNetworkImageProvider(
-            imagePath,
-          ),
+          imageProvider:Image.file(File(imglocal)).image
         ),
       ),
     );

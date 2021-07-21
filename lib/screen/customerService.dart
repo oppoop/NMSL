@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:NMSL/utils/pop_widget.dart';
 enum reportType {errorScreen,errorAccount,others}
 
 class CustomerService extends StatefulWidget {
@@ -219,11 +219,20 @@ class _CustomerServiceState extends State<CustomerService> {
         borderRadius: BorderRadius.circular(10.0),
         child: Stack(
           children: <Widget>[
-            Image.file(
-              File(img),
-              fit: BoxFit.cover,
-              width: 100.0,
-              height: 70.0,
+            GestureDetector(
+              onTap: () async {
+                await popWidget.imageFileDialog(
+                    context: context,
+                    img: img
+                );
+              },
+              child:Image.file(
+                File(img),
+                fit: BoxFit.cover,
+                width: 100.0,
+                height: 70.0,
+              ),
+
             ),
             Positioned(
               right: 5.0,
